@@ -1,4 +1,4 @@
-# Stoch_gaitAdaptation-
+# Stoch_gaitAdaptation
 Gait Adaptation based on terrain
 
 ## Paper 1: Using Gait Change for Terrain Sensing by Robots
