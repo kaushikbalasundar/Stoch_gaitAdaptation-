@@ -1,5 +1,6 @@
 # Stoch Gait Adaptation: Literature Review
-Gait Adaptation based on terrain
+
+We explore previous works that elucidate terrain identification and adaptation 
 
 ## Paper 1: Using Gait Change for Terrain Sensing by Robots
 
