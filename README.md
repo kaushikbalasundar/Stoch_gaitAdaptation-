@@ -128,3 +128,88 @@ Gait Adaptation based on terrain
 - Description of the transfer phase 
 - What is the relationship between support time, return time, and time period? (pg. 326)
 - How do you measure the latency between the end of gait and time of contact of leg on ground? 
+
+## Paper 3: Biologically Inspired Dynamic Walking of a Quadruped Robot on Irregular Terrain- Adaptation at Spinal Cord and Brain stem
+
+### What I understood: 
+
+#### Abstract:
+
+- The authors employ a Neural System Model, which integrates several reflxes such as the stretch reflex, vestibulospinal reflex, extensor and flexor reflex into CPG (Central Pattern Generator)
+
+
+#### Deliberation in chronological sequence:
+
+##### Introduction
+
+- Animals can easily adapt their gait in any walking environment. 
+- Previous studies by the same authors achieved dynamic walking on slopoes with only minimal irregularity. The walking was not smooth. Reflexes were independent of CPGs. 
+- This study combines CPGs and reflexes and has been proven to be more effective compared to using both independently. 
+- Testing done on quadruped robot 'Patrush'
+
+##### Specifications of Patrush: 
+
+	1. Each leg has three joints
+	2. Three joints are hip, knee and ankle (passive)
+	3. Length=36cm ; width=24cm ; height=33cm ; weight=5.2kg 
+	4. For reflex mechanism, 6 axis force sensor is attached on a lower link beneath the knee joint. 
+	5. A rate gyro as an angular velocity sensor is mounted on a body as a vestibule. 
+	6. All control programs written in C and executed on RT-Linux. 
+	7. Notations used: R(right), F(fore), H(hind), S(hip), x(joint angle),fx and fz(force sensor value in x and z direction). For example, LFS means the hip joint of the left foreleg, and LFS.x and LF.fx mean the angle at this joint and force sensor value at this leg.
+
+##### Walking on flat terrain using CPGs
+
+- CPG like models have the capability to generate and modulate walking patterns along with rhythmic joint motion. 
+
+-The model of CPG used is called 'Neural oscillator' (NO) proposed by Matsuoka. 
+
+- Single NO consists of two mutually inhibiting neurons. Each neuron is represented by a non-linear differential equation. 
+
+-  By connecting the NO of a hip joint of each leg, the NOs are mutually entrained and thus oscillate with  the same period and phase difference, thus resulting in the formation of a gait. 
+
+- In animals we consider two kinds of reflexes: 
+	1. Short term reflex or 'Phasic stretch reflex'
+	2. Long term reflex or 'Tonic stretch reflex'
+
+-By experiment using only CPGs and tonic stretch reflexes, it was confirmed that Patrush could walk on Flat terrain. 
+
+##### Walking on irregular terrain using CPGs and Reflexes: 
+
+- Adjustment of CPG and reflexes is based on somatic sensation such as contact with floor and tension of muscle of supporting legs, and vestibular sensation to achieve adaptive walking. 
+
+- Three types of models are considered for adaptation: 
+
+	1. a CPG only involving a tonic stretch reflex
+	2. a CPG and reflexes independent of CPG 
+	3. a CPG and reflexes via a CPG 
+
+- Type 1. did not result in Patrush walking over obstacles 3 cm in height, or slope more than 7 degrees.
+
+- Type 2. reflexes are independent of CPG and sum of CPG torque and reflexes torque is output to a motor. This was more efficient and walked over obstacles of 3cm height and 12 degrees of slope. The problems were as follows: 
+
+	1. Delay in joint motion from the phase of CPG in walking up a slope resulted in slipping and stamping with no progress. 
+
+	2. Sensor based adjustments to solve such problems increased number of paramters and made control system complicated. 
+
+	3. Falling of quadruped as there was no sync in signals from the CPG and flexor reflex. 
+
+- Type 3.
+
+	1. Problem 1 of Type 2. was solved using this approach because excitatory feedback signal to the extensor neuron of a CPG in walking up a slope makes the active period of the extensor neuron of a CPG become longer, and difference between phases of a CPG and joint motion becomes small.
+
+	2.  
+
+
+### What I didn't understand / need to explore:
+
+- What is a CPG and how are reflexes generated? 
+
+Ans: 
+Central pattern generators (CPGs) are biological neural circuits that produce rhythmic outputs in the absence of rhythmic input. They are the source of the tightly-coupled patterns of neural activity that drive rhythmic motions like walking, breathing, or chewing. 
+
+-Not fully understood: 'The body motion of the robot is constrained on the pitch plane by two poles since the robot has no joint around the roll axis'
+
+- What is the describing functions method for analyzing and tuning a NO? 
+
+## Paper 4: Realizing Learned Quadruped Locomotion Behaviors through Kinematic Motion Primitives
+
