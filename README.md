@@ -148,7 +148,7 @@ We explore previous works that elucidate terrain identification and adaptation
 - This study combines CPGs and reflexes and has been proven to be more effective compared to using both independently. 
 - Testing done on quadruped robot 'Patrush'
 
-##### Specifications of Patrush: 
+##### Specifications of Patrush 
 
 	1. Each leg has three joints
 	2. Three joints are hip, knee and ankle (passive)
@@ -162,7 +162,7 @@ We explore previous works that elucidate terrain identification and adaptation
 
 - CPG like models have the capability to generate and modulate walking patterns along with rhythmic joint motion. 
 
--The model of CPG used is called 'Neural oscillator' (NO) proposed by Matsuoka. 
+- The model of CPG used is called 'Neural oscillator' (NO) proposed by Matsuoka. 
 
 - Single NO consists of two mutually inhibiting neurons. Each neuron is represented by a non-linear differential equation. 
 
@@ -196,6 +196,7 @@ We explore previous works that elucidate terrain identification and adaptation
 
 - Type 3.
 
+
 	1. Problem 1 of Type 2. was solved using this approach because excitatory feedback signal to the extensor neuron of a CPG in walking up a slope makes the active period of the extensor neuron of a CPG become longer, and difference between phases of a CPG and joint motion becomes small.
 
 	2.  
@@ -208,9 +209,102 @@ We explore previous works that elucidate terrain identification and adaptation
 Ans: 
 Central pattern generators (CPGs) are biological neural circuits that produce rhythmic outputs in the absence of rhythmic input. They are the source of the tightly-coupled patterns of neural activity that drive rhythmic motions like walking, breathing, or chewing. 
 
--Not fully understood: 'The body motion of the robot is constrained on the pitch plane by two poles since the robot has no joint around the roll axis'
+- Not fully understood: 'The body motion of the robot is constrained on the pitch plane by two poles since the robot has no joint around the roll axis'
 
 - What is the describing functions method for analyzing and tuning a NO? 
 
 ## Paper 4: Realizing Learned Quadruped Locomotion Behaviors through Kinematic Motion Primitives
 
+
+### What I understood: 
+
+
+#### Abstract: 
+
+- Kinematic motion primitives (kMPs) are a set of basic patterns used by humans and other animals to realize periodic (walking, running) and discrete tasks
+
+- These basic motions are learned using 'Deep Reinforcement Learning' (D-RL), as opposed to traditional controllers. 
+
+- The objective is to realize basic walking patters namely trot, gallop, walk and bound using these kMPs. 
+
+- kMPs can effectively embody the walking pattern and using this we can derive other behaviour. 
+
+- D-RL uses policy gradient based approaches. The resulting walking is analyzed using principle component analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### What I didn't understand / need to explore:
+
+## Paper  5: Design, Development and Experimental Realization of a Quadrupedal
+Research Platform: Stoch
+
+### What I understood: 
+
+#### Abstract: 
+
+- 'Stoch' is a quadruped robot built to explore different research problems in legged locomotion, using traditional and learning based techniques. 
+
+- What is covered: hardware design, control architechture, merits & demerits of the quadruped platform on which Stoch is built upon, trotting, bounding, turning, and gait various gait transitions. 
+
+##### Since the emphasis of my study is on controls, it will be dealt with in more detail. 
+
+#### Electronic System Architecture: 
+
+- Objectives: 
+
+	1.  Tele-operation is implemented using SSH over wireless communication. 
+
+	2. Low level implementation of walking controller that gives the desired joint configuration to the actuators. 
+
+	3. Integrating sensory feedback with walking controller. 
+
+- Tele-operator: The walking controller changes by changing the internal parameters of the  CPG such as frequency, phase difference, and amplitude during process execution via SSH.
+
+- Motor actuation: PWM enabled motors coupled with Adafruit PWM drivers communicating via I2C. 
+
+- Sensory feedback: The sensory elements are: 
+	1. Joint encoders (angular position of shaft read using multi-duplex SPI bus)
+	2. IMU (measures RPY using sensor fusion)
+	3. Limit switches (self-calibration and failure prevention at joints)
+
+- Walking controller: 
+	
+	* The controller is based on non-linear coupled oscillator called central pattern generator (CPG)
+
+	* A CPG mimics what a network of neurons in our brains do to generate rhythmic signals. CPGs constitute non linear differential equations to mimic this. 
+
+	* CPG produces predetermined rhythmic patterns, and the difference in phase offset results in different types of gaits. 
+
+	* Low pass filters in the time domain ensures that there is no discontinuous changes in the variables (i.e., periodic changes are allowed but no high frequency changes)
+
+	* The coordinates obtained in the cartesian or polar coordinates (positions measured from the hip joint), is then converted into the corresponding joint angles using inverse kinematics. 
+
+#### Experimental Results: 
+
+- 6 different gaits are realized on flat ground which are trot, gallop, bound, walk, modified trot 1 and modified trot 2. 
+
+- Weight matrix contains basis function generated values about the various trajectories. 
+
+- 
+
+
+
+### What I didn't understand / need to explore:
+
+- What is the significance of multi-duplex?
+- How is self calibration possible using limit switches? 
+- Working of low pass filters 
+- How is the desired phase offset determined for a particular gait? 
+- Basis function based approach 
+- What is abduction? 
