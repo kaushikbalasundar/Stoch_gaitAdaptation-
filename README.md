@@ -13,20 +13,23 @@ We explore previous works that elucidate terrain identification and adaptation
 
 #### Deliberation in chronological sequence: 
 
-- The reason why gait transition occurs in biological systems is either due to mechanical limitations of the legs or due to the fact that in  the current gait the system cannot travel any faster. Another reason is to minimize energy expenditure.
+- The reason why gait transition occurs in biological systems is either due to mechanical limitations of the legs or due to the fact that in the current gait the system cannot travel any faster. Another reason is to minimize energy expenditure.
 
-- If travelling from point A to B becomes more energy efficient by one  gait than by the other, transition of gaits will occur. 
+- If travelling from point A to B becomes more energy efficient by one gait than by the other, transition of gaits will occur. 
 
 - The issue with reaction-based terrain classification (i.e., determining terrain based on the reaction forces) is that the data-sets involved is very large. 
 
 - Cycle period (tc): Time taken for completion of one gait cycle (fc = 1/tc). 
 
-- Duty factor = single stance period / cycle period
 
-- The problem of classifying the terrain and optimizing the speed & efficiency is divided into two sub-problems: 1) Find the optimal cycle frequency for a terrain at which the robot obtains highest physical speed or maximum power efficiency or a combination of both 2) Seperation between terrain classes within a chosen set of features: 
+- The problem of classifying the terrain and optimizing the speed & efficiency is divided into two sub-problems:
 
-	1.  Electric current
-	2.  Torque at each leg
+ 1) Find the optimal cycle frequency for a terrain at which the robot obtains highest physical speed or maximum power efficiency or a combination of both 
+
+ 2) Seperation between terrain classes within a chosen set of features: 
+
+	1. Electric current
+	2. Torque at each leg
 	3. Actual leg angle
 	4. Leg point of contact to the ground
 	5. Acceleration of the robot and other IMU measurements
@@ -38,11 +41,17 @@ We explore previous works that elucidate terrain identification and adaptation
 - Experiment & data collection:
 
 	1. 4 different terrains were used (dry sand, wet sand, grass, concrete)
+
 	2. 5 different cycle frequences(fc) used on each terrain. Different fc is obtained by changing the input speed control settings of robot
+
 	3. Relative leg rotations are  measured using optical encoders
+
 	4. Leg motor electrical current is measured
+
 	5. 3 axis IMU sensor (3 gyroscopes & 3 magnetometers)
+
 	6. Video of all trials was used to measure the time taken as this method is more accurate than using a stopwatch & also serves as documentation. 
+
 	7. Sampling rate: 30 samples/ revolution of leg
 
 -  Observations: 
@@ -71,7 +80,8 @@ We explore previous works that elucidate terrain identification and adaptation
 - Why does reaction based terrain classification consume a lot of data? 
 - '... speed dependencies to increase the classification accuracy' How does it increase accuracy? 
 - What is Buehler clock and central pattern generator (CPG)?
-- What is single stance period?
+- What is single stance period? (
+- Duty factor = single stance period / cycle period)
 - How do we change fc/input speed levels in Stoch? 
 - What is single stage batch nature of kNN? 
 - What is a Markovian process?  
@@ -199,7 +209,6 @@ We explore previous works that elucidate terrain identification and adaptation
 
 	1. Problem 1 of Type 2. was solved using this approach because excitatory feedback signal to the extensor neuron of a CPG in walking up a slope makes the active period of the extensor neuron of a CPG become longer, and difference between phases of a CPG and joint motion becomes small.
 
-	2.  
 
 
 ### What I didn't understand / need to explore:
@@ -213,40 +222,8 @@ Central pattern generators (CPGs) are biological neural circuits that produce rh
 
 - What is the describing functions method for analyzing and tuning a NO? 
 
-## Paper 4: Realizing Learned Quadruped Locomotion Behaviors through Kinematic Motion Primitives
 
-
-### What I understood: 
-
-
-#### Abstract: 
-
-- Kinematic motion primitives (kMPs) are a set of basic patterns used by humans and other animals to realize periodic (walking, running) and discrete tasks
-
-- These basic motions are learned using 'Deep Reinforcement Learning' (D-RL), as opposed to traditional controllers. 
-
-- The objective is to realize basic walking patters namely trot, gallop, walk and bound using these kMPs. 
-
-- kMPs can effectively embody the walking pattern and using this we can derive other behaviour. 
-
-- D-RL uses policy gradient based approaches. The resulting walking is analyzed using principle component analysis.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### What I didn't understand / need to explore:
-
-## Paper  5: Design, Development and Experimental Realization of a Quadrupedal
+## Paper  4: Design, Development and Experimental Realization of a Quadrupedal
 Research Platform: Stoch
 
 ### What I understood: 
@@ -257,7 +234,14 @@ Research Platform: Stoch
 
 - What is covered: hardware design, control architechture, merits & demerits of the quadruped platform on which Stoch is built upon, trotting, bounding, turning, and gait various gait transitions. 
 
-##### Since the emphasis of my study is on controls, it will be dealt with in more detail. 
+##### Introduction
+
+- Software consists of a real-time trajectory, which are passed as commands. 
+
+- CPG based trajectory generator also enables the realization of gaits like bound, walk, gallop and turning in hardware with no additional training and provides smooth transition from one gait to another. 
+
+
+Since the emphasis of my study is on controls, it will be dealt with in more detail. 
 
 #### Electronic System Architecture: 
 
@@ -284,7 +268,7 @@ Research Platform: Stoch
 
 	* A CPG mimics what a network of neurons in our brains do to generate rhythmic signals. CPGs constitute non linear differential equations to mimic this. 
 
-	* CPG produces predetermined rhythmic patterns, and the difference in phase offset results in different types of gaits. 
+	* CPG produces predetermined rhythmic patterns, and the difference in phase offset results in different types of gaits. This phase offset can be produced on the fly by passing the desired phase offset through a low pass filter. 
 
 	* Low pass filters in the time domain ensures that there is no discontinuous changes in the variables (i.e., periodic changes are allowed but no high frequency changes)
 
@@ -298,13 +282,59 @@ Research Platform: Stoch
 
 - 
 
-
-
 ### What I didn't understand / need to explore:
 
+- On what basis is this pre-determined pattern of rhythmic signals generated by the CPG?
+- "Oscillation frequency updates the phases and coupling ensure the phase offsets between the  oscillators" 
 - What is the significance of multi-duplex?
 - How is self calibration possible using limit switches? 
 - Working of low pass filters 
 - How is the desired phase offset determined for a particular gait? 
 - Basis function based approach 
-- What is abduction? 
+	Ans: It is a method of linear regression
+
+## Paper 5: Realizing Learned Quadruped Locomotion Behaviors through Kinematic Motion Primitives
+
+
+### What I understood: 
+
+
+#### Abstract: 
+
+- Kinematic motion primitives (kMPs) are a set of basic patterns used by humans and other animals to realize periodic (walking, running) and discrete tasks
+
+- These basic motions are learned using 'Deep Reinforcement Learning' (D-RL), as opposed to traditional controllers. 
+
+- The objective is to realize basic walking patters namely trot, gallop, walk and bound using these kMPs. 
+
+- kMPs can effectively embody the walking pattern and using this we can derive other behaviour. 
+
+- The kMPs are invariant waveforms, and it will be shown that a small set of kMPs is sufficient to explain a wide variety of complex coordinated motions, both periodic (e.g., walking and running), and discrete (e.g., reaching for a target with one hand). 
+
+- D-RL uses policy gradient based approaches. The resulting walking is analyzed using principle component analysis.
+
+- KMPs extracted from PCA followed a similar pattern irrespective of the type of gaits generated.
+
+#### Introduction
+
+- Proximal policy optimization (PPO) was used by Minitaur
+
+- KMPs are basis functions from which the trajectories for each of the joints were reconstructed.
+
+- A small number of basic trajectories are sufficient to realize periodic trajectories
+
+- Using RL and D-RL to derive robust locomotion behaviours in both bipeds and quadrupeds eliminates the need to model the robot and also allows the computer to adapt to changing environments
+
+- Controller learned is model free and done in simulation which is often not realistic for implementation. 
+
+- D-RL techniques are used as a optimization methodology to generate the trajectories and the gaits associated with
+
+
+### What I didn't understand / need to explore:
+
+- Similar patterns of different gaits in terms of what? 
+
+- How does using KMPs improve transferrability to the real hardware?
+
+- How do KMPs point to the fact that high freqency modulations aren't present in joint angle trajectories? 
+
